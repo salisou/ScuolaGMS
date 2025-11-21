@@ -12,7 +12,7 @@
         public decimal PunteggioMassimo { get; set; } = 10.0m;
         public DateTime Data { get; set; }
         // Relazione
-        public ICollection<Voto> Voti { get; set; } = new List<Voto>();
+        public ICollection<Voto> Voti { get; set; } = [];
     }
 }
 

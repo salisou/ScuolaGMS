@@ -8,8 +8,8 @@
         public string? Email { get; set; }
         public string? Telefono { get; set; }
 
-        public ICollection<Iscrizione> Iscrizione { get; set; } = new List<Iscrizione>();
-        public ICollection<Presenza> Presenza { get; set; } = new List<Presenza>();
-        public ICollection<Voto> Voti = new List<Voto>();
+        public ICollection<Iscrizione> Iscrizione { get; set; } = [];
+        public ICollection<Presenza> Presenze { get; set; } = [];
+        public ICollection<Voto> Voti = [];
     }
 }

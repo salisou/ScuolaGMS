@@ -7,7 +7,7 @@
         public string Cognome { get; set; } = string.Empty;
         public string? Email { get; set; }
         public string? Telefono { get; set; }
-        public ICollection<Lezione> lezioni { get; set; } = new List<Lezione>();
-        public ICollection<Valutazione> valutazioni { get; set; } = new List<Valutazione>();
+        public ICollection<Lezione> Lezioni { get; set; } = [];
+        public ICollection<Valutazione> Valutazioni { get; set; } = [];
     }
 }

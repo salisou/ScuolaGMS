@@ -7,8 +7,8 @@
         public required string Descrizione { get; set; } = string.Empty;
         public int Crediti { get; set; }
 
-        public ICollection<Iscrizione> Iscrizioni { get; set; } = new List<Iscrizione>();
-        public ICollection<Lezione> Lezioni { get; set; } = new List<Lezione>();
-        public ICollection<Valutazione> valutazioni { get; set; } = new List<Valutazione>();
+        public ICollection<Iscrizione> Iscrizioni { get; set; } = [];
+        public ICollection<Lezione> Lezioni { get; set; } = [];
+        public ICollection<Valutazione> Valutazioni { get; set; } = [];
     }
 }
