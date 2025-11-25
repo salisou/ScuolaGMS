@@ -1,23 +1,30 @@
 ﻿using Api.Data;
+using Api.GenericRepositories.Interfaces;
 using Api.GenericRepositories.Iterfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api.GenericRepositories.Repositories
 {
-    public class Respository<T> : IGeniricRepositoy<T> where T : class
+    public class Repository<T> : IGenericRepository<T> where T : class
     {
         private readonly ScuolaDbContext _context;
         private readonly DbSet<T> _dbset;
 
-        public Respository(ScuolaDbContext context, DbSet<T> dbset)
+        public Repository(ScuolaDbContext context)
         {
             _context = context;
-            _dbset = dbset;
+            _dbset = _context.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> GatAllAsync()=> await _dbset.ToListAsync();
-        
-        public async Task<T?> GetByIdAsync(int id) => await _dbset.FindAsync(id);
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            return await _dbset.ToListAsync();
+        }
+
+        public async Task<T?> GetByIdAsync(int id)
+        {
+            return await _dbset.FindAsync(id);
+        }
 
         public async Task InsertAsync(T entity)
         {
@@ -34,7 +41,7 @@ namespace Api.GenericRepositories.Repositories
         public async Task DeleteAsync(int id)
         {
             var entity = await _dbset.FindAsync(id);
-            if (entity != null) 
+            if (entity != null)
                 _dbset.Remove(entity);
         }
 
