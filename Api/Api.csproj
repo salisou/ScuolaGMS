@@ -8,9 +8,13 @@
 
 	<ItemGroup>
 	  <Compile Remove="GenericRepository\**" />
+	  <Compile Remove="Servicens\**" />
 	  <Content Remove="GenericRepository\**" />
+	  <Content Remove="Servicens\**" />
 	  <EmbeddedResource Remove="GenericRepository\**" />
+	  <EmbeddedResource Remove="Servicens\**" />
 	  <None Remove="GenericRepository\**" />
+	  <None Remove="Servicens\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -34,7 +38,6 @@
 
 	<ItemGroup>
 		<Folder Include="Controllers\" />
-		<Folder Include="Services\" />
 	</ItemGroup>
 
 </Project>

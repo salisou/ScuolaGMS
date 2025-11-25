@@ -8,24 +8,26 @@ namespace Api.Data
         public ScuolaDbContext(DbContextOptions options) : base(options)
         {
         }
-        DbSet<Aula> Aule { get; set; }
-        DbSet<Classe> Classi { get; set; }
-        DbSet<Corso> Corsi { get; set; }
-        DbSet<Docente> Docenti { get; set; }
-        DbSet<Iscrizione> Iscrizioni { get; set; }
-        DbSet<Lezione> Lezioni { get; set; }
-        DbSet<Presenza> Presenze { get; set; }
-        DbSet<Studente> Studenti { get; set; }
-        DbSet<Valutazione> Valutazioni { get; set; }
-        DbSet<Voto> Voti { get; set; }
+
+        public DbSet<Aula> Aule { get; set; }
+        public DbSet<Classe> Classi { get; set; }
+        public DbSet<Corso> Corsi { get; set; }
+        public DbSet<Docente> Docenti { get; set; }
+        public DbSet<Iscrizione> Iscrizioni { get; set; }
+        public DbSet<Lezione> Lezioni { get; set; }
+        public DbSet<Presenza> Presenze { get; set; }
+        public DbSet<Studente> Studenti { get; set; }
+        public DbSet<Valutazione> Valutazioni { get; set; }
+        public DbSet<Voto> Voti { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Unicità iscrizione
             modelBuilder.Entity<Iscrizione>()
                 .HasIndex(i => new { i.StudenteId, i.CorsoId, i.AnnoAccademico })
                 .IsUnique();
 
-            // Relazioni uno-a-molti
+            // Relazioni Iscrizione
             modelBuilder.Entity<Iscrizione>()
                 .HasOne(i => i.Studente)
                 .WithMany(s => s.Iscrizione)
@@ -39,7 +41,7 @@ namespace Api.Data
             modelBuilder.Entity<Iscrizione>()
                 .HasOne(i => i.Classe)
                 .WithMany(cl => cl.Iscrizioni)
-                .HasForeignKey(i => i.ClasseId);
+                .HasForeignKey(i => i.ClasseId); // <-Fix qui
 
             // Relazioni Lezione
             modelBuilder.Entity<Lezione>()
@@ -89,23 +91,6 @@ namespace Api.Data
                 .HasOne(v => v.Valutazione)
                 .WithMany(val => val.Voti)
                 .HasForeignKey(v => v.ValutazioneId);
-
-            // Relazione uno-a-molti
-            modelBuilder.Entity<Iscrizione>()
-                .HasOne(i => i.Studente)
-                .WithMany(s => s.Iscrizione)
-                .HasForeignKey(i => i.StudenteId);
-
-            modelBuilder.Entity<Iscrizione>()
-                .HasOne(i => i.Corso)
-                .WithMany(c => c.Iscrizioni)
-                .HasForeignKey(i => i.CorsoId);
-
-            modelBuilder.Entity<Iscrizione>()
-                .HasOne(i => i.Classe)
-                .WithMany(c => c.Iscrizioni)
-                .HasForeignKey(i => i.CorsoId);
         }
-
     }
 }
