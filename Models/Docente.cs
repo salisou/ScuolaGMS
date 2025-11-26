@@ -11,3 +11,6 @@
         public ICollection<Valutazione> Valutazioni { get; set; } = [];
     }
 }
+
+
+

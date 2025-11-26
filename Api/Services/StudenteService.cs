@@ -1,6 +1,6 @@
 ﻿namespace Api.Services
 {
-    public class StudenteServices
+    public class StudenteService
     {
     }
 }
