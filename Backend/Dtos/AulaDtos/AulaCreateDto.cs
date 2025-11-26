@@ -1,4 +1,4 @@
 ﻿namespace Dtos.AulaDtos
 {
-    public class AulaCreateDto : AulaBase;
+    public class AulaCreateDto : AulaBase { }
 }

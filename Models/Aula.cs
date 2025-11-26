@@ -1,4 +1,6 @@
-﻿namespace Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Models
 {
     public class Aula
     {

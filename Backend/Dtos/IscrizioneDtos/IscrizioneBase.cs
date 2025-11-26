@@ -8,6 +8,6 @@
         public int StudenteId { get; set; }
         public int CorsoId { get; set; }
         public int ClasseId { get; set; }
-        public string AnnoAccademico { get; set; } = default!;
+        public string AnnoAccademico { get; set; } = string.Empty;
     }
 }
