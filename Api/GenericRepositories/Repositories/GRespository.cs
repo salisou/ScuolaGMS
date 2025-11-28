@@ -9,12 +9,12 @@ namespace Api.GenericRepositories.Repositories
     /// <summary>
     /// Implementazione generica del repository pattern.
     /// </summary>
-    public class Repository<T> : IGenericRepository<T> where T : class
+    public class GRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly ScuolaDbContext _context;
         private readonly DbSet<T> _dbset;
 
-        public Repository(ScuolaDbContext context)
+        public GRepository(ScuolaDbContext context)
         {
             _context = context;
             _dbset = _context.Set<T>();
