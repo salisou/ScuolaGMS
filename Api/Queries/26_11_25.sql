@@ -9,11 +9,13 @@ VALUES ('C#', 'Programmazone in c#', 30),
 	   ('SQL', 'BigData', 10)
 
 select * from Docenti
+
 INSERT INTO Docenti (Nome, Cognome, Email, Telefono)
-VALUES ('Marco', 'Cogoni', 'c.marco@gmail.com', '215465984')
+VALUES ('Norberto', 'Tessi', 'n.tessi@gmail.com', '12354687')
 
 select * from Aule
 
+select * from  Lezioni
 
 INSERT INTO Lezioni 
 	(CorsoId, DocenteId, AulaId, Inizio, Fine, Argomento)
@@ -32,4 +34,9 @@ FROM Lezioni AS l
 INNER JOIN Docenti AS d ON l.DocenteId = d.DocenteId
 INNER JOIN Corsi AS c ON c.CorsoId = l.CorsoId
 
-SELECT * FROM Lezioni
+SELECT * FROM Valutazioni
+
+INSERT INTO Valutazioni
+	(CorsoId, DocenteId, Titolo, Tipo, PunteggioMassimo, Data)
+VALUES 
+	(1, 3, 'Sviluppo App', 'programmazione in c#', 30, '2025-11-27')

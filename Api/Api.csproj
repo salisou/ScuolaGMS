@@ -7,12 +7,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Controllers\**" />
 	  <Compile Remove="GenericRepository\**" />
 	  <Compile Remove="Servicens\**" />
+	  <Content Remove="Controllers\**" />
 	  <Content Remove="GenericRepository\**" />
 	  <Content Remove="Servicens\**" />
+	  <EmbeddedResource Remove="Controllers\**" />
 	  <EmbeddedResource Remove="GenericRepository\**" />
 	  <EmbeddedResource Remove="Servicens\**" />
+	  <None Remove="Controllers\**" />
 	  <None Remove="GenericRepository\**" />
 	  <None Remove="Servicens\**" />
 	</ItemGroup>
@@ -30,6 +34,10 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Serilog" Version="4.3.0" />
+		<PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.1" />
 	</ItemGroup>
 
@@ -39,7 +47,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Controllers\" />
+	  <Folder Include="Controlles\" />
 	</ItemGroup>
 
 </Project>

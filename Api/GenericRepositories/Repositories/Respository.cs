@@ -1,85 +1,74 @@
-﻿using Api.Data;
+﻿
+using Api.Data;
 using Api.GenericRepositories.Interfaces;
+using Api.Responses;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api.GenericRepositories.Repositories
 {
     /// <summary>
     /// Implementazione generica del repository pattern.
-    /// Consente di eseguire operazioni CRUD per qualsiasi entità del database.
     /// </summary>
-    /// <typeparam name="T">Il tipo di entità su cui operare (classe).</typeparam>
     public class Repository<T> : IGenericRepository<T> where T : class
     {
         private readonly ScuolaDbContext _context;
         private readonly DbSet<T> _dbset;
 
-        /// <summary>
-        /// Costruttore che inizializza il contesto e il DbSet associato al tipo T.
-        /// </summary>
-        /// <param name="context">Il DbContext utilizzato per l'accesso al database.</param>
         public Repository(ScuolaDbContext context)
         {
             _context = context;
-            _dbset = _context.Set<T>(); // DbSet generico
+            _dbset = _context.Set<T>();
         }
 
-        /// <summary>
-        /// Restituisce tutte le entità presenti nella tabella corrispondente.
-        /// </summary>
-        /// <returns>Una collezione di entità di tipo T.</returns>
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<ApiResponse<IEnumerable<T>>> GetAllAsync()
         {
-            return await _dbset.ToListAsync();
+            var items = await _dbset.ToListAsync();
+            if (items.Count == 0)
+                return ApiResponse<IEnumerable<T>>.Fail("Tabella vuota!");
+            return ApiResponse<IEnumerable<T>>.Ok(items);
         }
 
-        /// <summary>
-        /// Cerca un'entità in base al suo identificatore primario.
-        /// </summary>
-        /// <param name="id">L'ID dell'entità da recuperare.</param>
-        /// <returns>L'entità trovata oppure null se non esiste.</returns>
-        public async Task<T?> GetByIdAsync(int id)
+        public async Task<ApiResponse<T?>> GetByIdAsync(int id)
         {
-            return await _dbset.FindAsync(id);
+            var entity = await _dbset.FindAsync(id);
+            if (entity == null)
+                return ApiResponse<T?>.Fail("Entità non trovata!");
+            return ApiResponse<T?>.Ok(entity);
         }
 
-        /// <summary>
-        /// Inserisce una nuova entità nel database.
-        /// </summary>
-        /// <param name="entity">L'entità da inserire.</param>
-        public async Task InsertAsync(T entity)
+        public async Task<ApiResponse<T>> InsertAsync(T entity)
         {
             await _dbset.AddAsync(entity);
+            return ApiResponse<T>.Ok(entity, "Entità aggiunta (non ancora salvata)");
         }
 
-        /// <summary>
-        /// Aggiorna un'entità esistente.
-        /// </summary>
-        /// <param name="entity">L'entità modificata.</param>
-        public Task UpdateAsync(T entity)
+        public Task<ApiResponse<T>> UpdateAsync(T entity)
         {
             _dbset.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
-            return Task.CompletedTask;
+            return Task.FromResult(ApiResponse<T>.Ok(entity, "Entità aggiornata (non ancora salvata)"));
         }
 
-        /// <summary>
-        /// Elimina un'entità in base al suo ID.
-        /// </summary>
-        /// <param name="id">L'ID dell'entità da eliminare.</param>
-        public async Task DeleteAsync(int id)
+        public async Task<ApiResponse<bool>> DeleteAsync(int id)
         {
-            var entity = await _dbset.FindAsync(id);
-            if (entity != null)
-                _dbset.Remove(entity);
+            T? entity = await _dbset.FindAsync(id);
+            if (entity == null)
+                return ApiResponse<bool>.Fail("Entità non trovata!");
+            _dbset.Remove(entity);
+            return ApiResponse<bool>.Ok(true, "Entità rimossa (non ancora salvata)");
         }
 
-        /// <summary>
-        /// Salva tutte le modifiche pendenti nel database.
-        /// </summary>
-        public async Task SaveAsync()
+        public async Task<ApiResponse<bool>> SaveAsync()
         {
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.SaveChangesAsync();
+                return ApiResponse<bool>.Ok(true, "Salvataggio eseguito.");
+            }
+            catch (Exception ex)
+            {
+                return ApiResponse<bool>.Fail($"Errore durante il salvataggio: {ex.Message}");
+            }
         }
     }
 }
