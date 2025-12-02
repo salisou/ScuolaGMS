@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using Dtos.AulaDtos;
-using Dtos.StudenteDtos;
+using Dtos.ClasseDtos;
 using Dtos.CorsoDtos;
 using Dtos.DocenteDtos;
+using Dtos.IscrizioneDtos;
 using Dtos.LezioneDtos;
 using Dtos.PresenzeDtos;
+using Dtos.StudenteDtos;
 using Dtos.ValutazioneDtos;
-using Dtos.IscrizioneDtos;
-using Dtos.ClasseDtos;
 using Dtos.VotoDtos;
 using Models;
 
@@ -64,7 +64,7 @@ namespace Api.Mappings
 
             // Voto
             CreateMap<Voto, VotoDto>();
-            CreateMap<VotoCreateDto, Voto>();
+            CreateMap<VotoCreateDto, Voto>().ReverseMap();
             CreateMap<VotoUpdateDto, Voto>();
         }
     }

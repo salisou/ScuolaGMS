@@ -43,7 +43,7 @@ namespace Api.Services
                     return ApiResponse<CorsoDto?>.Fail(result.Message!);
 
                 var mapped = _mapper.Map<CorsoDto>(result.Data);
-                return ApiResponse<CorsoDto?>.Ok(mapped);
+                return ApiResponse<CorsoDto?>.Ok(mapped, "Corso recuperato con successo.");
             }
             catch (Exception ex)
             {
