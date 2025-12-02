@@ -6,9 +6,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Api.GenericRepositories.Repositories
 {
-    /// <summary>
-    /// Implementazione generica del repository pattern.
-    /// </summary>
     public class GRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly ScuolaDbContext _context;
@@ -22,40 +19,65 @@ namespace Api.GenericRepositories.Repositories
 
         public async Task<ApiResponse<IEnumerable<T>>> GetAllAsync()
         {
-            var items = await _dbset.ToListAsync();
-            if (items.Count == 0)
-                return ApiResponse<IEnumerable<T>>.Fail("Tabella vuota!");
-            return ApiResponse<IEnumerable<T>>.Ok(items);
+            try
+            {
+                var items = await _dbset.ToListAsync();
+                if (items.Count == 0)
+                    return ApiResponse<IEnumerable<T>>.Fail("Nessun dato trovato.");
+                return ApiResponse<IEnumerable<T>>.Ok(items, "Dati recuperati con successo.");
+            }
+            catch (Exception ex)
+            {
+                return ApiResponse<IEnumerable<T>>.Fail($"Errore durante il recupero: {ex.Message}");
+            }
         }
 
         public async Task<ApiResponse<T?>> GetByIdAsync(int id)
         {
-            var entity = await _dbset.FindAsync(id);
-            if (entity == null)
-                return ApiResponse<T?>.Fail("Entità non trovata!");
-            return ApiResponse<T?>.Ok(entity);
+            try
+            {
+                var entity = await _dbset.FindAsync(id);
+                if (entity == null)
+                    return ApiResponse<T?>.Fail("Entità non trovata.");
+                return ApiResponse<T?>.Ok(entity, "Entità recuperata con successo.");
+            }
+            catch (Exception ex)
+            {
+                return ApiResponse<T?>.Fail($"Errore durante la ricerca: {ex.Message}");
+            }
         }
 
         public async Task<ApiResponse<T>> InsertAsync(T entity)
         {
+            if (entity == null)
+                return ApiResponse<T>.Fail("Entità non valida.");
             await _dbset.AddAsync(entity);
-            return ApiResponse<T>.Ok(entity, "Entità aggiunta (non ancora salvata)");
+            return ApiResponse<T>.Ok(entity, "Entità aggiunta (non ancora salvata).");
         }
 
-        public Task<ApiResponse<T>> UpdateAsync(T entity)
+        public async Task<ApiResponse<T>> UpdateAsync(T entity)
         {
+            if (entity == null)
+                return ApiResponse<T>.Fail("Entità non valida.");
             _dbset.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
-            return Task.FromResult(ApiResponse<T>.Ok(entity, "Entità aggiornata (non ancora salvata)"));
+            return await Task.FromResult(ApiResponse<T>.Ok(entity, "Entità aggiornata (non ancora salvata)."));
         }
 
         public async Task<ApiResponse<bool>> DeleteAsync(int id)
         {
-            T? entity = await _dbset.FindAsync(id);
-            if (entity == null)
-                return ApiResponse<bool>.Fail("Entità non trovata!");
-            _dbset.Remove(entity);
-            return ApiResponse<bool>.Ok(true, "Entità rimossa (non ancora salvata)");
+            try
+            {
+                var entity = await _dbset.FindAsync(id);
+                if (entity == null)
+                    return ApiResponse<bool>.Fail("Entità non trovata.");
+                _dbset.Remove(entity);
+                return ApiResponse<bool>.Ok(true, "Entità rimossa (non ancora salvata).");
+            }
+            catch (Exception ex)
+            {
+                return ApiResponse<bool>.Fail($"Errore durante l'eliminazione: {ex.Message}");
+            }
         }
 
         public async Task<ApiResponse<bool>> SaveAsync()
@@ -63,7 +85,7 @@ namespace Api.GenericRepositories.Repositories
             try
             {
                 await _context.SaveChangesAsync();
-                return ApiResponse<bool>.Ok(true, "Salvataggio eseguito.");
+                return ApiResponse<bool>.Ok(true, "Salvataggio eseguito con successo.");
             }
             catch (Exception ex)
             {
