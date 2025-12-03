@@ -4,9 +4,12 @@
     <Project Path="F:/TalentForm2025/Backend/Dtos/Dtos.csproj" />
     <Project Path="F:/TalentForm2025/Models/Models.csproj" />
   </Folder>
-  <Folder Name="/Frontend/" />
+  <Folder Name="/Frontend/">
+    <Project Path="Ui/Ui.csproj" Id="2a4b5305-7dec-4c6c-a3cc-3f7399c77b7c" />
+  </Folder>
   <Folder Name="/Maui/">
-    <Project Path="MauiApp/MauiApp.csproj" Id="d0d4ce65-74d8-4888-b07c-b1453a6b7f9f" />
-    <Project Path="MauiApp2/MauiApp2/MauiApp2.csproj" Id="c7bb10fc-744d-4265-ad32-ba70d3fc6337" />
+    <Project Path="MauiApp/MauiApp.csproj" Id="d0d4ce65-74d8-4888-b07c-b1453a6b7f9f">
+      <Deploy Solution="Debug|*" />
+    </Project>
   </Folder>
 </Solution>

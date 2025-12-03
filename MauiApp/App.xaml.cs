@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Extensions.DependencyInjection;
+﻿using MauiApp.Pages;
 
 namespace MauiApp
 {
@@ -8,12 +7,11 @@ namespace MauiApp
         public App()
         {
             InitializeComponent();
+            MainPage = new MainPage();
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            //return new Window(new AppShell());
-            MainPage = new NavigationPage(new MainPage());
             return base.CreateWindow(activationState);
         }
     }

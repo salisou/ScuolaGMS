@@ -2,11 +2,50 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp.Pages.MainPage"
-             Title="MainPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             BackgroundColor="DarkSlateGrey"
+             Title="Home Page">
+
+    <ScrollView>
+        <StackLayout Margin="100"
+                     Padding="10">
+            <!-- Example of a SearchBar control -->
+            <SearchBar x:Name="ricercaControl"
+                       BackgroundColor="White"
+                       TextColor="Gray"
+                       Margin="0,20"
+                       SearchButtonPressed="ricercaControl_SearchButtonPressed"/>
+
+            <!-- Example of a Button control -->
+            <Button x:Name="btnTest"
+                    Text="Click Me!"
+                    Clicked="btnTest_Clicked"/>
+
+
+            <!-- Example of an ImageButton control -->
+            <ImageButton Source="dotnet_bot.png"
+                         HeightRequest="250"
+                         WidthRequest="250"
+                         Margin="10"
+                         x:Name="ibtnDot"
+                         Clicked="ibtnDot_Clicked"/>
+            <!-- Example of RadioButton controls -->
+            <RadioButton Content="Option 1"
+                         GroupName="group1"
+                         CheckedChanged="RadioButton_CheckedChanged"/>
+
+            <!-- Example of RadioButton controls -->
+            <RadioButton Content="Option 2"
+                         GroupName="group1"
+                      CheckedChanged="RadioButton_CheckedChanged"/>
+            <RadioButton Content="Option 3"
+                         GroupName="group1"
+                      CheckedChanged="RadioButton_CheckedChanged"/>
+            <RadioButton Content="Option 4"
+                         GroupName="group1"
+                      CheckedChanged="RadioButton_CheckedChanged"/>
+
+    </StackLayout>
+    </ScrollView>
 </ContentPage>
+    
+    

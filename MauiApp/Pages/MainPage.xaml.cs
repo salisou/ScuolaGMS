@@ -2,8 +2,28 @@ namespace MauiApp.Pages;
 
 public partial class MainPage : ContentPage
 {
-	public MainPage()
-	{
-		InitializeComponent();
-	}
+    public MainPage()
+    {
+        InitializeComponent();
+    }
+
+    private void btnTest_Clicked(object sender, EventArgs e)
+    {
+        DisplayAlert("Alert", "Button Clicked!", "OK");
+    }
+
+    private void ibtnDot_Clicked(object sender, EventArgs e)
+    {
+        btnTest.BackgroundColor = Colors.Red;
+    }
+
+    private void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        DisplayAlert("Attenzione!", $"Change: {e.Value}", "Ok");
+    }
+
+    private void ricercaControl_SearchButtonPressed(object sender, EventArgs e)
+    {
+        DisplayAlert("Ricerca", $"Searching: {ricercaControl.Text}", "OK");
+    }
 }
