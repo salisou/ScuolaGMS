@@ -13,7 +13,7 @@ namespace MauiApp
 
         protected override Microsoft.Maui.Hosting.MauiApp CreateMauiApp()
         {
-            throw new NotImplementedException();
+            return MauiProgram.CreateMauiApp();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Api.GenericRepositories.Interfaces;
+﻿using Api.GenericRepositories.Repositories;
 using Api.Responses;
 using AutoMapper;
 using Dtos.VotoDtos;
@@ -8,10 +8,10 @@ namespace Api.Services
 {
     public class VotoService
     {
-        private readonly IGenericRepository<Voto> _repo;
+        private readonly GRepository<Voto> _repo;
         private readonly IMapper _mapper;
 
-        public VotoService(IGenericRepository<Voto> repo, IMapper mapper)
+        public VotoService(GRepository<Voto> repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
@@ -22,11 +22,9 @@ namespace Api.Services
             try
             {
                 var result = await _repo.GetAllAsync();
-                if (!result.Success)
-                    return ApiResponse<IEnumerable<VotoDto>>.Fail(result.Message!);
 
                 var mapped = _mapper.Map<IEnumerable<VotoDto>>(result.Data);
-                return ApiResponse<IEnumerable<VotoDto>>.Ok(mapped);
+                return ApiResponse<IEnumerable<VotoDto>>.Ok(mapped, "Lista ");
             }
             catch (Exception ex)
             {
@@ -57,14 +55,11 @@ namespace Api.Services
             {
                 Voto entity = _mapper.Map<Voto>(dto);
                 ApiResponse<Voto> insertResult = await _repo.InsertAsync(entity);
-
                 if (!insertResult.Success)
                     return ApiResponse<VotoDto>.Fail(insertResult.Message!);
-
                 ApiResponse<bool> saveResult = await _repo.SaveAsync();
                 if (!saveResult.Success)
                     return ApiResponse<VotoDto>.Fail(saveResult.Message!);
-
                 VotoDto mapped = _mapper.Map<VotoDto>(insertResult.Data);
                 return ApiResponse<VotoDto>.Ok(mapped, "Voto creato con successo");
             }

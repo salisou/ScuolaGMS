@@ -1,7 +1,7 @@
 ﻿using Api.GenericRepositories.Repositories;
 using Api.Responses;
 using AutoMapper;
-using Dtos.PresenzeDtos;
+using Dtos;
 using Models;
 
 namespace Api.Services
@@ -26,7 +26,7 @@ namespace Api.Services
                     return ApiResponse<IEnumerable<PresenzaDto>>.Fail(result.Message!);
 
                 var mapped = _mapper.Map<IEnumerable<PresenzaDto>>(result.Data);
-                return ApiResponse<IEnumerable<PresenzaDto>>.Ok(mapped);
+                return ApiResponse<IEnumerable<PresenzaDto>>.Ok(mapped, "Lista recuperata con successo.");
             }
             catch (Exception ex)
             {
@@ -43,7 +43,7 @@ namespace Api.Services
                     return ApiResponse<PresenzaDto?>.Fail(result.Message!);
 
                 var mapped = _mapper.Map<PresenzaDto>(result.Data);
-                return ApiResponse<PresenzaDto?>.Ok(mapped);
+                return ApiResponse<PresenzaDto?>.Ok(mapped, "Presenza recuperata con successo.");
             }
             catch (Exception ex)
             {

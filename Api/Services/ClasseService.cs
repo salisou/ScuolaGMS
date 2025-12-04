@@ -1,4 +1,4 @@
-﻿using Api.GenericRepositories.Interfaces;
+﻿using Api.GenericRepositories.Repositories;
 using Api.Responses;
 using AutoMapper;
 using Dtos.ClasseDtos;
@@ -8,10 +8,10 @@ namespace Api.Services
 {
     public class ClasseService
     {
-        private readonly IGenericRepository<Classe> _repo;
+        private readonly GRepository<Classe> _repo;
         private readonly IMapper _mapper;
 
-        public ClasseService(IGenericRepository<Classe> repo, IMapper mapper)
+        public ClasseService(GRepository<Classe> repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
