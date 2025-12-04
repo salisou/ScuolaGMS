@@ -4,30 +4,51 @@
              x:Class="MauiApp.Pages.MainPage"
              BackgroundColor="DarkSlateGrey"
              Title="Home Page">
-
+    
     <ScrollView>
-        <StackLayout Margin="100"
-                     Padding="10">
+        <StackLayout   Margin="20,20">
             <!-- Example of a SearchBar control -->
             <SearchBar x:Name="ricercaControl"
                        BackgroundColor="White"
                        TextColor="Gray"
-                       Margin="0,20"
                        SearchButtonPressed="ricercaControl_SearchButtonPressed"/>
 
             <!-- Example of a Button control -->
             <Button x:Name="btnTest"
                     Text="Click Me!"
+                       Margin="20,20"
                     Clicked="btnTest_Clicked"/>
 
 
             <!-- Example of an ImageButton control -->
-            <ImageButton Source="dotnet_bot.png"
+            <!--<ImageButton Source="dotnet_bot.png"
                          HeightRequest="250"
                          WidthRequest="250"
                          Margin="10"
                          x:Name="ibtnDot"
-                         Clicked="ibtnDot_Clicked"/>
+                         Clicked="ibtnDot_Clicked"/>-->
+            <SwipeView>
+                <SwipeView.LeftItems>
+                    <SwipeItems>
+                        <SwipeItem BackgroundColor="LightGreen"
+                                   IconImageSource="salva.png"
+                                   Invoked="SwipeItem_Invoked"
+                                   Text="Salva"/>
+                        <SwipeItem BackgroundColor="White"
+                                   IconImageSource="cancella.png"
+                                   Invoked="SwipeItem_Invoked_1"
+                                   Text="Cancella"/>
+                    </SwipeItems>
+                </SwipeView.LeftItems>
+                <Grid BackgroundColor="LightCyan"
+                      HeightRequest="60"
+                      WidthRequest="300"
+                      Margin="10">
+                    <Label Text="Prova"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </SwipeView>
             <!-- Example of RadioButton controls -->
             <RadioButton Content="Option 1"
                          GroupName="group1"
@@ -43,6 +64,8 @@
             <RadioButton Content="Option 4"
                          GroupName="group1"
                       CheckedChanged="RadioButton_CheckedChanged"/>
+
+
 
     </StackLayout>
     </ScrollView>

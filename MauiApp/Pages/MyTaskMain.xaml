@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp.Pages.MyTaskMain"
+             BackgroundColor="White"
+             Title="My Task Main">
+    
+    
+    <!--Griglia principala Scaffold-->
+    <Grid Margin="15" RowDefinitions=".1*, .3*, .7*">
+        <Label Text="My Task" StyleClass="DarkBlue, Header"/>
+        <Grid Grid.Row="1" BackgroundColor="DarkRed"/>
+        <Grid Grid.Row="2" BackgroundColor="DarkGoldenrod"/>
+    </Grid>
+</ContentPage>

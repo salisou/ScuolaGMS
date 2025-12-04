@@ -2,6 +2,7 @@
 using Api.Responses;
 using AutoMapper;
 using Dtos.VotoDtos;
+using Microsoft.AspNetCore.Authorization;
 using Models;
 
 namespace Api.Services
@@ -49,6 +50,8 @@ namespace Api.Services
             }
         }
 
+        // Models/Dtos -> DBCoentext -> (GRepository <-(Interfaces)) -> Service -> Controller -> <-Client
+    
         public async Task<ApiResponse<VotoDto>> CreateAsync(VotoCreateDto dto)
         {
             try

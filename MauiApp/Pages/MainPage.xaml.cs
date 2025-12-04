@@ -26,4 +26,14 @@ public partial class MainPage : ContentPage
     {
         DisplayAlert("Ricerca", $"Searching: {ricercaControl.Text}", "OK");
     }
+
+    private void SwipeItem_Invoked(object sender, EventArgs e)
+    {
+        DisplayAlert("Swipe", "Swipe Item Invoked", "OK");
+    }
+
+    private void SwipeItem_Invoked_1(object sender, EventArgs e)
+    {
+        DisplayAlert("Swipe", "Delete Item Invoked", "OK");
+    }
 }

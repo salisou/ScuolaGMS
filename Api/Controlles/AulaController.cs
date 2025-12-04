@@ -7,6 +7,7 @@ namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class AulaController : ControllerBase
     {
         private readonly AulaService _aulaService;

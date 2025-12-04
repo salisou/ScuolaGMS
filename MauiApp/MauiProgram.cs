@@ -11,7 +11,8 @@
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("Roboto-Italic.ttf", "Italic");
-                    fonts.AddFont("Roboto-Medium.ttf", "Medium");
+                    fonts.AddFont("Roboto-Medium.ttf", "Roboto");
+                    fonts.AddFont("Epilogue-Regular.ttf", "Epilogue");
                 });
 
             return builder.Build();
