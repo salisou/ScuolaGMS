@@ -9,7 +9,18 @@
     <!--Griglia principala Scaffold-->
     <Grid Margin="15" RowDefinitions=".1*, .3*, .7*">
         <Label Text="My Task" StyleClass="DarkBlue, Header"/>
-        <Grid Grid.Row="1" BackgroundColor="DarkRed"/>
+        <Grid Grid.Row="1" RowDefinitions=".2*, .7*">
+            <Label StyleClass="LightBlue, SubHeader" Text="CATEGORY"/>
+            <CollectionView Grid.Row="1" ItemsSource="{Binding Categories}">
+           
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding CategoryName}"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+        
         <Grid Grid.Row="2" BackgroundColor="DarkGoldenrod"/>
     </Grid>
 </ContentPage>

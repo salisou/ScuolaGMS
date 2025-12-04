@@ -18,4 +18,9 @@
         <Setter Property="FontSize" Value="Title"/>
         <Setter Property="VerticalOptions" Value="Center"/>
     </Style>
+
+    <Style Class="SubHeader" TargetType="Label">
+        <Setter Property="FontSize" Value="Medium"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
 </ResourceDictionary>
