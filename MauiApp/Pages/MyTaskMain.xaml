@@ -2,20 +2,32 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiApp.Pages.MyTaskMain"
+             xmlns:vm="clr-namespace:MauiApp.ViewModels"
              BackgroundColor="White"
              Title="My Task Main">
-    
-    
+
+    <ContentPage.BindingContext>
+        <vm:MyTaskMainViewModel/>
+    </ContentPage.BindingContext>
+
     <!--Griglia principala Scaffold-->
     <Grid Margin="15" RowDefinitions=".1*, .3*, .7*">
         <Label Text="My Task" StyleClass="DarkBlue, Header"/>
         <Grid Grid.Row="1" RowDefinitions=".2*, .7*">
             <Label StyleClass="LightBlue, SubHeader" Text="CATEGORY"/>
             <CollectionView Grid.Row="1" ItemsSource="{Binding Categories}">
-           
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="5" Orientation="Horizontal"/>
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding CategoryName}"/>
+                        <Grid Padding="10" >
+                            <VerticalStackLayout Padding="15" Spacing="10">
+                                <Label StyleClass="LightBlue" Text="{Binding PendingTasks, StringFormat='{0} Tasks'}"/>
+                                <Label Text="{Binding CategoryName}" StyleClass="DarkBlue, CardTitle"/>
+                                <ProgressBar Progress=".5" ProgressColor="{Binding Color}"/>
+                            </VerticalStackLayout>
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

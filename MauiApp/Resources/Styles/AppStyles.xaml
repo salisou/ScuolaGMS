@@ -15,12 +15,17 @@
 
     <Style Class="Header" TargetType="Label">
         <Setter Property="FontAttributes" Value="Bold"/>
-        <Setter Property="FontSize" Value="Title"/>
+        <Setter Property="FontSize" Value="25"/>
         <Setter Property="VerticalOptions" Value="Center"/>
     </Style>
 
     <Style Class="SubHeader" TargetType="Label">
         <Setter Property="FontSize" Value="Medium"/>
         <Setter Property="VerticalOptions" Value="Center"/>
+    </Style>
+    
+    <Style Class="CardTitle" TargetType="Label">
+        <Setter Property="FontSize" Value="Medium"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
 </ResourceDictionary>
