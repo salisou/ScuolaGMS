@@ -89,22 +89,22 @@ namespace MauiApp.ViewModels
 
         public void UpdateData()
         {
-            foreach(var c in Categories)
+            foreach (var c in Categories)
             {
                 IEnumerable<MyTask> tasks = from t in Mytasks
-                            where t.CategoryId == c.Id
-                            select t;
+                                            where t.CategoryId == c.Id
+                                            select t;
 
                 IEnumerable<object> completed = from t in tasks
                                                 where t.Completed == true
                                                 select t;
 
                 IEnumerable<MyTask> notCompleted = from t in tasks
-                                   where t.Completed == false
-                                   select t;
+                                                   where t.Completed == false
+                                                   select t;
 
                 c.PendingTasks = notCompleted.Count();
-                c.Prcentage = (float)completed.Count() / (float)tasks.Count();
+                c.Percentage = (float)completed.Count() / (float)tasks.Count();
             }
 
             foreach (var t in Mytasks)

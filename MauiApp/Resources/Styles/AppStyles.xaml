@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Color x:Key="DarkBlue">#212B4F</Color>
     <Color x:Key="LightBlue">#8A8BA6</Color>
+    <Color x:Key="SimonaColor">#edf0ed</Color>
 
     <Style Class="DarkBlue" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource DarkBlue}"/>
@@ -27,5 +28,17 @@
     <Style Class="CardTitle" TargetType="Label">
         <Setter Property="FontSize" Value="Medium"/>
         <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+
+    <Shadow x:Key="shadow" Brush="#CFD0D4"
+        Opacity="0.6"
+        Radius="15"
+        Offset="10,15"/>
+    
+    <Style TargetType="RoundRectangle">
+        <Setter Property="CornerRadius" Value="10"/>
+        <Setter Property="Fill" Value="{StaticResource SimonaColor}"/>
+        <Setter Property="WidthRequest" Value="200"/>
+        <Setter Property="Shadow" Value="{StaticResource shadow}"/>
     </Style>
 </ResourceDictionary>
