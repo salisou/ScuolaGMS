@@ -1,11 +1,19 @@
 <Solution>
   <Folder Name="/Backend/">
-    <Project Path="F:/TalentForm2025/Api/Api.csproj" Id="de7d436a-db68-4398-9d11-911f976fda0e" />
-    <Project Path="F:/TalentForm2025/Backend/Dtos/Dtos.csproj" />
-    <Project Path="F:/TalentForm2025/Models/Models.csproj" />
+    <Project Path="F:/TalentForm2025/Api/Api.csproj" Id="de7d436a-db68-4398-9d11-911f976fda0e">
+      <Build Solution="Debug|*" Project="false" />
+    </Project>
+    <Project Path="F:/TalentForm2025/Backend/Dtos/Dtos.csproj">
+      <Build Solution="Debug|*" Project="false" />
+    </Project>
+    <Project Path="F:/TalentForm2025/Models/Models.csproj">
+      <Build Solution="Debug|*" Project="false" />
+    </Project>
   </Folder>
   <Folder Name="/Frontend/">
-    <Project Path="Ui/Ui.csproj" Id="2a4b5305-7dec-4c6c-a3cc-3f7399c77b7c" />
+    <Project Path="Ui/Ui.csproj" Id="2a4b5305-7dec-4c6c-a3cc-3f7399c77b7c">
+      <Build Solution="Debug|*" Project="false" />
+    </Project>
   </Folder>
   <Folder Name="/Maui/">
     <Project Path="MauiApp/MauiApp.csproj" Id="d0d4ce65-74d8-4888-b07c-b1453a6b7f9f">

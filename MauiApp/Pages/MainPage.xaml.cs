@@ -9,7 +9,7 @@ public partial class MainPage : ContentPage
 
     private void btnTest_Clicked(object sender, EventArgs e)
     {
-        DisplayAlert("Alert", "Button Clicked!", "OK");
+        DisplayAlertAsync("Alert", "Button Clicked!", "OK");
     }
 
     private void ibtnDot_Clicked(object sender, EventArgs e)
@@ -19,21 +19,21 @@ public partial class MainPage : ContentPage
 
     private void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
     {
-        DisplayAlert("Attenzione!", $"Change: {e.Value}", "Ok");
+        DisplayAlertAsync("Attenzione!", $"Change: {e.Value}", "Ok");
     }
 
     private void ricercaControl_SearchButtonPressed(object sender, EventArgs e)
     {
-        DisplayAlert("Ricerca", $"Searching: {ricercaControl.Text}", "OK");
+        DisplayAlertAsync("Ricerca", $"Searching: {ricercaControl.Text}", "OK");
     }
 
     private void SwipeItem_Invoked(object sender, EventArgs e)
     {
-        DisplayAlert("Swipe", "Swipe Item Invoked", "OK");
+        DisplayAlertAsync("Swipe", "Swipe Item Invoked", "OK");
     }
 
     private void SwipeItem_Invoked_1(object sender, EventArgs e)
     {
-        DisplayAlert("Swipe", "Delete Item Invoked", "OK");
+        DisplayAlertAsync("Swipe", "Delete Item Invoked", "OK");
     }
 }

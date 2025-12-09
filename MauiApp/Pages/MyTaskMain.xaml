@@ -4,7 +4,7 @@
              x:Class="MauiApp.Pages.MyTaskMain"
              xmlns:vm="clr-namespace:MauiApp.ViewModels"
              xmlns:converters="clr-namespace:MauiApp.Converters"
-             BackgroundColor="White"
+             BackgroundColor="#ebe4f2"
              Title="My Task Main">
 
     <ContentPage.BindingContext>
@@ -22,7 +22,7 @@
             <Label StyleClass="LightBlue, SubHeader" Text="CATEGORY"/>
             <CollectionView Grid.Row="1" ItemsSource="{Binding Categories}">
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout ItemSpacing="5" Orientation="Horizontal"/>
+                    <LinearItemsLayout ItemSpacing="15" Orientation="Horizontal"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -39,18 +39,23 @@
             </CollectionView>
         </Grid>
 
-        <Grid Grid.Row="2" RowDefinitions=".2*, .8*">
+        <Grid Grid.Row="2" RowDefinitions=".2*, .8*" Margin="0,20,0,0">
             <Label Text="PENDING PAGE" StyleClass="LightBlue, SubHeader"/>
             <CollectionView Grid.Row="1" ItemsSource="{Binding Mytasks}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Background="Transparent">
+                        <Border Background="#FFFFEF"
+                                StrokeShape="12"
+                                StrokeThickness="1"
+                                Opacity="20"
+                                Margin="0,5">
                             <HorizontalStackLayout>
                                 <CheckBox x:Name="checkBox"
                                           IsChecked="{Binding Completed}"
                                           VerticalOptions="Center"
+                                          CheckedChanged="checkBox_CheckedChanged"
                                           Color="{Binding TaskColor, Converter={StaticResource ColorConverter}}"/>
-                                <Label Text="{Binding TaskName}" VerticalOptions="Center" TextColor="Gray">
+                                <Label Text="{Binding TaskName}" VerticalOptions="Center" TextColor="Black">
                                     <Label.Triggers>
                                         <DataTrigger Binding="{Binding Source={x:Reference checkBox}, Path=IsChecked}"
                                                      TargetType="Label"
@@ -60,7 +65,7 @@
                                     </Label.Triggers>
                                 </Label>
                             </HorizontalStackLayout>
-                        </Frame>
+                        </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
