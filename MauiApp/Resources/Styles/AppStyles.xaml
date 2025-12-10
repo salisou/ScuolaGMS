@@ -5,9 +5,10 @@
     <Color x:Key="DarkBlue">#212B4F</Color>
     <Color x:Key="LightBlue">#8A8BA6</Color>
     <Color x:Key="SimonaColor">#FFFFEF</Color>
+    <Color x:Key="Moussa">#F8FAFF</Color>
 
     <Style Class="DarkBlue" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource DarkBlue}"/>
+        <Setter Property="TextColor" Value="{StaticResource DarkBlue}"/> 
     </Style>
     
     <Style Class="LightBlue" TargetType="Label">
@@ -48,4 +49,31 @@
         <Setter Property="Shadow" Value="{StaticResource shadow}"/>
     </Style>
 
+    <Style x:Key="Task" TargetType="Entry" >
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="TextColor" Value="Black"/>
+        <Setter Property="Margin" Value="10,0"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="HorizontalTextAlignment" Value="Start"/>
+        <Setter Property="PlaceholderColor" Value="{StaticResource LightBlue}"/>
+    </Style>
+
+
+    <EllipseGeometry
+        x:Key="CircleGeometry" 
+        Center="50,50"
+        RadiusX="30" 
+        RadiusY="30"/>
+    
+    <Style x:Key="CircularButton" TargetType="Button">
+        <Setter Property="FontSize" Value="Large"/>
+        <Setter Property="BorderWidth" Value="15"/>
+        <Setter Property="BorderColor" Value="Black"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="HeightRequest" Value="100"/>
+        <Setter Property="WidthRequest" Value="100"/>
+        <Setter Property="VerticalOptions" Value="End"/>
+        <Setter Property="HorizontalOptions" Value="End"/>
+        <Setter Property="Clip" Value="{StaticResource CircleGeometry}"/>
+    </Style>
 </ResourceDictionary>

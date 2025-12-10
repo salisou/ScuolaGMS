@@ -15,4 +15,18 @@ public partial class MyTaskMain : ContentPage
     {
         vm.UpdateData();
     }
+
+    private void btnNewTask_Clicked(object sender, EventArgs e)
+    {
+        var taskName = new AddTaskPage
+        {
+            BindingContext = new NewTaskViewModel
+            {
+                Tasks = vm.Tasks,
+                Categories = vm.Categories
+            }
+        };
+
+        Navigation.PushModalAsync(taskName);
+    }
 }

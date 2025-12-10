@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp.Pages.AddTaskPage"
+             BackgroundColor="#c7c0f3"
+             Title="Add new Task">
+
+    <Grid RowDefinitions=".2*, .1*, .6*, .1*">
+        <Image Source="dotnet_bot.png" />
+        <Border Grid.Row="1" Background="#FFFFEF"
+                StrokeShape="10"
+                StrokeThickness="1"
+                Opacity="10"
+                Margin="15">
+            <Entry Placeholder="Enter new task"
+               Text="{Binding MyTask}"
+               Style="{StaticResource Task}"/>
+        </Border>
+
+        <CollectionView
+                Grid.Row="2"
+                Margin="15"
+                ItemsSource="{Binding Categories}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout HorizontalItemSpacing="5"
+                                     Orientation="Vertical"
+                                     Span="2"
+                                     VerticalItemSpacing="5"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border>
+                        <RadioButton
+                            GroupName="Category"
+                            TextColor="Black"
+                            IsChecked="{Binding IsSelected}"
+                            Content="{Binding CategoryName}"/>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <HorizontalStackLayout Grid.Row="3"
+                               Margin="10"
+                               Spacing="15"
+                               VerticalOptions="Center"
+                               HorizontalOptions="CenterAndExpand">
+            <Button CornerRadius="15"
+                    Text="Add Task"
+                    ImageSource="salva.png"
+                    HeightRequest="50"
+                    WidthRequest="150"
+                    BackgroundColor="#7462e4"
+                    Clicked="Button_Clicked"/>
+            <Button CornerRadius="15"
+                    Text="Add Category"
+                    ImageSource="salva.png"
+                    BackgroundColor="#7462e4"
+                    Clicked="Button_Clicked_1"/>
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>

@@ -1,95 +1,85 @@
 ﻿using MauiApp.Models;
+using PropertyChanged;
 using System.Collections.ObjectModel;
 
 namespace MauiApp.ViewModels
 {
+    [AddINotifyPropertyChangedInterface]
     public class MyTaskMainViewModel
     {
-        public ObservableCollection<Category> Categories { get; set; } = new();
-        public ObservableCollection<MyTask> Mytasks { get; set; } = new();
+        public ObservableCollection<Category> Categories { get; set; }
+        public ObservableCollection<MyTask> Tasks { get; set; }
 
         public MyTaskMainViewModel()
         {
             FillData();
+            Tasks.CollectionChanged += Tasks_CollectionChanged;
+        }
+
+        private void Tasks_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            UpdateData();
         }
 
         private void FillData()
         {
-            Categories.Clear();
-            Categories.Add(new Category
-            {
-                Id = 1,
-                CategoryName = ".NET MAUI Course",
-                Color = "#CF14DF"
-            });
-            Categories.Add(new Category
-            {
-                Id = 2,
-                CategoryName = "Tutorials",
-                Color = "#df6f14"
-            });
-            Categories.Add(new Category
-            {
-                Id = 3,
-                CategoryName = "Shopping",
-                Color = "#14df80"
-            });
-            Categories.Add(new Category
-            {
-                Id = 4,
-                CategoryName = "Work",
-                Color = "#1416df"
-            });
-            Categories.Add(new Category
-            {
-                Id = 5,
-                CategoryName = "Personal",
-                Color = "#df1414"
-            });
+            Categories = new ObservableCollection<Category>
+               {
+                    new() {
+                         Id = 1,
+                         CategoryName = ".NET MAUI Course",
+                         Color = "#CF14DF"
+                    },
+                    new() {
+                         Id = 2,
+                         CategoryName = "Tutorials",
+                         Color = "#df6f14"
+                    },
+                    new() {
+                         Id = 3,
+                         CategoryName = "Shopping",
+                         Color = "#14df80"
+                    }
+               };
 
-            Mytasks.Clear();
-            Mytasks.Add(new MyTask
-            {
-                TaskName = "Learn .NET MAUI",
-                Completed = false,
-                CategoryId = 1,
-                TaskColor = "#CF14DF"
-            });
-            Mytasks.Add(new MyTask
-            {
-                TaskName = "Build a sample app",
-                Completed = false,
-                CategoryId = 1,
-                TaskColor = "#CF14DF"
-            });
-            Mytasks.Add(new MyTask
-            {
-                TaskName = "Read MAUI documentation",
-                Completed = true,
-                CategoryId = 1,
-                TaskColor = "#CF14DF"
-            });
-            Mytasks.Add(new MyTask
-            {
-                TaskName = "Watch tutorial videos",
-                Completed = false,
-                CategoryId = 2,
-                TaskColor = "#df6f14"
-            });
-            Mytasks.Add(new MyTask
-            {
-                TaskName = "Write blog post",
-                Completed = true,
-                CategoryId = 2,
-                TaskColor = "#df6f14"
-            });
-            Mytasks.Add(new MyTask
-            {
-                TaskName = "Buy groceries",
-                Completed = true,
-                CategoryId = 3,
-                TaskColor = "#14df80"
-            });
+            Tasks = new ObservableCollection<MyTask>
+               {
+                    new() {
+                         TaskName = "Upload exercise files",
+                         Completed = false,
+                         CategoryId = 1
+                    },
+                    new() {
+                         TaskName = "Plan next course",
+                         Completed = false,
+                         CategoryId = 1
+                    },
+                    new() {
+                         TaskName = "Upload new ASP.NET video on YouTube",
+                         Completed = false,
+                         CategoryId = 2
+                    },
+                    new() {
+                         TaskName = "Fix Settings.cs class of the project",
+                         Completed = false,
+                         CategoryId = 2
+                    },
+                    new() {
+                         TaskName = "Update github repository",
+                         Completed = true,
+                         CategoryId = 2
+                    },
+                    new() {
+                         TaskName = "Buy eggs",
+                         Completed = false,
+                         CategoryId = 3
+                    },
+                    new() {
+                         TaskName = "Go for the pepperoni pizza",
+                         Completed = false,
+                         CategoryId = 3
+                    },
+               };
 
             UpdateData();
         }
@@ -98,29 +88,30 @@ namespace MauiApp.ViewModels
         {
             foreach (var c in Categories)
             {
-                IEnumerable<MyTask> tasks = from t in Mytasks
-                                            where t.CategoryId == c.Id
-                                            select t;
+                var tasks = from t in Tasks
+                            where t.CategoryId == c.Id
+                            select t;
 
-                IEnumerable<object> completed = from t in tasks
-                                                where t.Completed == true
-                                                select t;
+                var completed = from t in tasks
+                                where t.Completed == true
+                                select t;
 
-                IEnumerable<MyTask> notCompleted = from t in tasks
-                                                   where t.Completed == false
-                                                   select t;
+                var notCompleted = from t in tasks
+                                   where t.Completed == false
+                                   select t;
+
+
 
                 c.PendingTasks = notCompleted.Count();
                 c.Percentage = (float)completed.Count() / (float)tasks.Count();
             }
-
-            foreach (var t in Mytasks)
+            foreach (var t in Tasks)
             {
-                var catColor = (from c in Categories
-                                where c.Id == t.CategoryId
-                                select c.Color).FirstOrDefault();
-
-                t.TaskColor = catColor!;
+                var catColor =
+                     (from c in Categories
+                      where c.Id == t.CategoryId
+                      select c.Color).FirstOrDefault();
+                t.TaskColor = catColor;
             }
         }
     }

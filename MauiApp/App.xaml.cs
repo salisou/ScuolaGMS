@@ -7,7 +7,8 @@ namespace MauiApp
         public App()
         {
             InitializeComponent();
-            MainPage = new MyTaskMain();
+            MainPage = new NavigationPage(new MyTaskMain());
+            //MainPage = new AddTask();
         }
 
         protected override Window CreateWindow(IActivationState? activationState)

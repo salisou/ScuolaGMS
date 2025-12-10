@@ -1,5 +1,8 @@
-﻿namespace MauiApp.Models
+﻿using PropertyChanged;
+
+namespace MauiApp.Models
 {
+    [AddINotifyPropertyChangedInterface]
     public class MyTask
     {
         public string TaskName { get; set; }
